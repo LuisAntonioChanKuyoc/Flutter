@@ -21,24 +21,56 @@ class _HomeState extends State<Home> {
       appBar: AppBar(title: Text("Demo"), actions: <Widget>[
         IconButton(icon: Icon(Icons.shopping_cart), onPressed: () => {})
       ]),
-      body: Center(child: Text('Bienvenido')),
+      body: Container(
+          padding:  EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          // width: MediaQuery.of(context).size.width - 40,
+          // alignment: Alignment.center,
+          child: Card(
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const ListTile(
+                leading: Icon(Icons.album),
+                title: Text('Foto'),
+                subtitle: Text('Crear un Pixyalbum.'),
+              ),
+              ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                    child: const Text('Crear'),
+                    onPressed: () {/* ... */},
+                  ),
+                ],
+              ),
+            ],
+          ))),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             SizedBox(
-                  height: 40,
-                ),
+              height: 40,
+            ),
             ListTile(
               leading: CircleAvatar(
-                // backgroundColor: Color(0xff4db6ac),
-               ) ,
+                  // backgroundColor: Color(0xff4db6ac),
+                  ),
               title: Text("Mauricio Canche"),
               subtitle: Text("example@desarrollo.com"),
             ),
-            ListTile(leading: Icon(Icons.home, color: Color(0xff4db6ac)), title: Text("Inicio")),
-            ListTile(leading: Icon(Icons.account_box, color: Color(0xff4db6ac)), title: Text('Perfil')),
-            ListTile(leading: Icon(Icons.exit_to_app, color: Color(0xff4db6ac)), title: Text("Salir")),
+            ListTile(
+              leading: Icon(Icons.home, color: Color(0xff4db6ac)),
+              title: Text("Inicio"),
+              onTap: () {},
+            ),
+            ListTile(
+                leading: Icon(Icons.account_box, color: Color(0xff4db6ac)),
+                title: Text('Perfil'),
+                onTap: () {}),
+            ListTile(
+                leading: Icon(Icons.exit_to_app, color: Color(0xff4db6ac)),
+                title: Text("Salir"),
+                onTap: () {}),
           ],
         ),
       ),
