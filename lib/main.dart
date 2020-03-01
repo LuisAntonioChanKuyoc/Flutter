@@ -1,4 +1,3 @@
-import 'package:app_demo/app/page/login.dart';
 import 'package:flutter/material.dart';
 
 import 'app/Core/Auth/Auth.dart';
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'App',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primaryColor: Colors.teal[400],
       ),
       home: new RootPage(auth: new Auth()),
     );
