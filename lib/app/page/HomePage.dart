@@ -31,14 +31,14 @@ class _HomeState extends State<Home> {
                 ),
             ListTile(
               leading: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://i1.wp.com/codesundar.com/wp-content/uploads/2019/08/cropped-codesundar-favicon.png")),
+                // backgroundColor: Color(0xff4db6ac),
+               ) ,
               title: Text("Mauricio Canche"),
               subtitle: Text("example@desarrollo.com"),
             ),
-            ListTile(leading: Icon(Icons.home), title: Text("Inicio")),
-            ListTile(leading: Icon(Icons.account_box), title: Text('Perfil')),
-            ListTile(leading: Icon(Icons.exit_to_app), title: Text("Salir")),
+            ListTile(leading: Icon(Icons.home, color: Color(0xff4db6ac)), title: Text("Inicio")),
+            ListTile(leading: Icon(Icons.account_box, color: Color(0xff4db6ac)), title: Text('Perfil')),
+            ListTile(leading: Icon(Icons.exit_to_app, color: Color(0xff4db6ac)), title: Text("Salir")),
           ],
         ),
       ),
