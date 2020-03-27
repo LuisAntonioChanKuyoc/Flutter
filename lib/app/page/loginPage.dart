@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Home()));
+              context, MaterialPageRoute(builder: (context) => HomePage()));
         });
   }
 
@@ -241,50 +241,50 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Demo'),
-      ),
+        appBar: AppBar(
+          title: Text('Demo'),
+        ),
         body: SingleChildScrollView(
             child: Container(
-      height: MediaQuery.of(context).size.height -80,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center, //Alinea centro
-              children: <Widget>[
-                _title(),
-                SizedBox(
-                  height: 10,
+          height: MediaQuery.of(context).size.height - 80,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center, //Alinea centro
+                  children: <Widget>[
+                    _title(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    _emailPasswordWidget(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    _submitButton(),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.centerRight,
+                      child: Text('Olvido su contraseña?',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500)),
+                    ),
+                    _divider(),
+                    _facebookButton(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-                _emailPasswordWidget(),
-                SizedBox(
-                  height: 20,
-                ),
-                _submitButton(),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  alignment: Alignment.centerRight,
-                  child: Text('Olvido su contraseña?',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                ),
-                _divider(),
-                _facebookButton(),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          ),
-          Align(
+              ),
+              Align(
                 alignment: Alignment.bottomCenter,
                 child: _createAccountLabel(),
               )
-        ],
-      ),
-    )));
+            ],
+          ),
+        )));
   }
 }

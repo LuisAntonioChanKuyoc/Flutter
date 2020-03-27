@@ -71,13 +71,13 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.NOT_LOGGED_IN:
         return new LoginPage(
-          // auth: widget.auth,
-          // loginCallback: loginCallback,
-        );
+            // auth: widget.auth,
+            // loginCallback: loginCallback,
+            );
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new Home(
+          return new HomePage(
             userId: _userId,
             auth: widget.auth,
             logoutCallback: logoutCallback,

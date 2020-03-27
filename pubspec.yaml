@@ -27,6 +27,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   google_fonts: ^0.3.5
   flutter_widget_gallery: ^0.1.2
+  redux: ^4.0.0
+  flutter_redux: ^0.6.0
+  redux_logging: ^0.4.0
 
 dev_dependencies:
   flutter_test:
