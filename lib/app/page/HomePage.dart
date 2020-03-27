@@ -15,31 +15,120 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedPage = 1;
+  int _selectedPage = 0;
+
   final _pageOptions = [
     Container(
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+        // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         // width: MediaQuery.of(context).size.width - 40,
         // alignment: Alignment.center,
-        child: Card(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: Stack(
+      children: <Widget>[
+        ListView(
           children: <Widget>[
-            const ListTile(
-              leading: Icon(Icons.album),
-              title: Text('Foto'),
-              subtitle: Text('Crear un Pixyalbum.'),
-            ),
-            ButtonBar(
-              children: <Widget>[
-                FlatButton(
-                  child: const Text('Crear'),
-                  onPressed: () {/* ... */},
-                ),
-              ],
-            ),
+            //         Card(
+            //     child: Column(
+            //   // mainAxisSize: MainAxisSize.min,
+            //   children: <Widget>[
+            //     const ListTile(
+            //       leading: Icon(Icons.album),
+            //       title: Text('Foto'),
+            //       subtitle: Text('Crear un Pixyalbum.'),
+            //     ),
+            //     ButtonBar(
+            //       children: <Widget>[
+            //         FlatButton(
+            //           child: const Text('Crear'),
+            //           onPressed: () {
+            //              Navigator.pushNamed(context, '/create');
+            //           },
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // )),
+            Card(
+                child: Container(
+              // width: 100,
+              height: 100,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/img/img3.jpg",
+                      fit: BoxFit.fitHeight,
+                      // height: 300,
+                      // width: 150.0,
+                    ),
+
+                    title: new Text(
+                      "Album 2",
+                      style: new TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: new Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Text("Album",
+                              style: new TextStyle(
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.normal)),
+                          new Text('Population: ',
+                              style: new TextStyle(
+                                  fontSize: 11.0,
+                                  fontWeight: FontWeight.normal)),
+                        ]),
+                    //trailing: ,
+                    onTap: () {},
+                  )
+                ],
+              ),
+            )),
+            Card(
+                child: Container(
+              // width: 100,
+              height: 100,
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/img/img1.jpg",
+                      fit: BoxFit.cover,
+                      // height: 300,
+                      // width: 150.0,
+                    ),
+
+                    title: Text(
+                      "Album 1",
+                      style: new TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          new Text("Album",
+                              style: new TextStyle(
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.normal)),
+                          new Text('Population: ',
+                              style: new TextStyle(
+                                  fontSize: 11.0,
+                                  fontWeight: FontWeight.normal)),
+                        ]),
+                    //trailing: ,
+                    onTap: () {
+                      // Navigator.pushNamed(context, '/cart');
+                    },
+                  )
+                ],
+              ),
+            ))
           ],
-        ))),
+        )
+      ],
+    )),
     Container(
       padding: EdgeInsets.symmetric(horizontal: 0),
       margin: EdgeInsets.only(top: 32),
@@ -101,7 +190,9 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(
                 Icons.shopping_cart,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
             ),
           )
         ],
@@ -136,6 +227,13 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {}),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create');
+        },
+        child: Icon(Icons.add_a_photo),
+        backgroundColor: Color(0xff4db6ac),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedPage,
