@@ -9,7 +9,9 @@ import 'package:redux/redux.dart';
 import 'app/Core/Auth/Auth.dart';
 import 'app/page/cart_page.dart';
 import 'app/page/detail_album.dart';
+import 'app/page/feature_selection_album.dart';
 import 'app/page/feature_selection_page.dart';
+import 'app/page/list_album.dart';
 import 'app/page/root_page.dart';
 
 void main() {
@@ -36,11 +38,13 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => RootPage(auth: Auth()),
-          // '/': (context) => DeailPage(),
+          // '/': (context) => AlbumSelectionPage(),
           '/home': (context) => HomePage(),
           '/create': (context) => FeatureSelectionPage(),
           '/cart': (context) => CartPage(),
-          '/Detail': (context) => DeailPage()
+          '/Detail': (context) => DeailPage(),
+          '/ListAbum': (context) => ListAlbumPage(),
+
         });
   }
 }

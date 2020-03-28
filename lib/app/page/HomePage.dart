@@ -16,8 +16,82 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
-
-  final _pageOptions = [
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Fotos'),
+        centerTitle: true,
+        actions: <Widget>[
+          Container(
+            padding: EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+            ),
+          )
+        ],
+      ),
+      body: _Tab(context,_selectedPage),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            SizedBox(
+              height: 40,
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                  // backgroundColor: Color(0xff4db6ac),
+                  ),
+              title: Text("Mauricio Canche"),
+              subtitle: Text("example@desarrollo.com"),
+            ),
+            ListTile(
+              leading: Icon(Icons.home, color: Color(0xff4db6ac)),
+              title: Text("Inicio"),
+              onTap: () {},
+            ),
+            ListTile(
+                leading: Icon(Icons.account_box, color: Color(0xff4db6ac)),
+                title: Text('Perfil'),
+                onTap: () {}),
+            ListTile(
+                leading: Icon(Icons.exit_to_app, color: Color(0xff4db6ac)),
+                title: Text("Salir"),
+                onTap: () {}),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create');
+        },
+        child: Icon(Icons.add_a_photo),
+        backgroundColor: Color(0xff4db6ac),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedPage,
+          onTap: (int currentPage) {
+            setState(() {
+              _selectedPage = currentPage;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home), title: Text('Inicio')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline), title: Text('perfil'))
+          ]),
+    );
+  }
+  Widget _Tab(BuildContext context, int tab){
+    final _pageOptions = [
     Container(
         // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         // width: MediaQuery.of(context).size.width - 40,
@@ -26,27 +100,6 @@ class _HomePageState extends State<HomePage> {
       children: <Widget>[
         ListView(
           children: <Widget>[
-            //         Card(
-            //     child: Column(
-            //   // mainAxisSize: MainAxisSize.min,
-            //   children: <Widget>[
-            //     const ListTile(
-            //       leading: Icon(Icons.album),
-            //       title: Text('Foto'),
-            //       subtitle: Text('Crear un Pixyalbum.'),
-            //     ),
-            //     ButtonBar(
-            //       children: <Widget>[
-            //         FlatButton(
-            //           child: const Text('Crear'),
-            //           onPressed: () {
-            //              Navigator.pushNamed(context, '/create');
-            //           },
-            //         ),
-            //       ],
-            //     ),
-            //   ],
-            // )),
             Card(
                 child: Container(
               // width: 100,
@@ -80,7 +133,9 @@ class _HomePageState extends State<HomePage> {
                                   fontWeight: FontWeight.normal)),
                         ]),
                     //trailing: ,
-                    onTap: () {},
+                    onTap: () {
+                Navigator.pushNamed(context, '/Detail');
+                    },
                   )
                 ],
               ),
@@ -95,8 +150,6 @@ class _HomePageState extends State<HomePage> {
                     leading: Image.asset(
                       "assets/img/img1.jpg",
                       fit: BoxFit.cover,
-                      // height: 300,
-                      // width: 150.0,
                     ),
 
                     title: Text(
@@ -119,6 +172,7 @@ class _HomePageState extends State<HomePage> {
                         ]),
                     //trailing: ,
                     onTap: () {
+                Navigator.pushNamed(context, '/Detail');
                       // Navigator.pushNamed(context, '/cart');
                     },
                   )
@@ -176,78 +230,6 @@ class _HomePageState extends State<HomePage> {
       ),
     )
   ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Fotos'),
-        centerTitle: true,
-        actions: <Widget>[
-          Container(
-            padding: EdgeInsets.only(right: 20.0),
-            child: IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-            ),
-          )
-        ],
-      ),
-      body: _pageOptions[_selectedPage],
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            SizedBox(
-              height: 40,
-            ),
-            ListTile(
-              leading: CircleAvatar(
-                  // backgroundColor: Color(0xff4db6ac),
-                  ),
-              title: Text("Mauricio Canche"),
-              subtitle: Text("example@desarrollo.com"),
-            ),
-            ListTile(
-              leading: Icon(Icons.home, color: Color(0xff4db6ac)),
-              title: Text("Inicio"),
-              onTap: () {},
-            ),
-            ListTile(
-                leading: Icon(Icons.account_box, color: Color(0xff4db6ac)),
-                title: Text('Perfil'),
-                onTap: () {}),
-            ListTile(
-                leading: Icon(Icons.exit_to_app, color: Color(0xff4db6ac)),
-                title: Text("Salir"),
-                onTap: () {}),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/create');
-        },
-        child: Icon(Icons.add_a_photo),
-        backgroundColor: Color(0xff4db6ac),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedPage,
-          onTap: (int currentPage) {
-            setState(() {
-              _selectedPage = currentPage;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home), title: Text('Inicio')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline), title: Text('perfil'))
-          ]),
-    );
+    return _pageOptions[tab];
   }
 }
