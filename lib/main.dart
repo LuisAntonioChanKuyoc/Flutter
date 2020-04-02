@@ -7,6 +7,7 @@ import 'package:redux_logging/redux_logging.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'app/Core/Auth/Auth.dart';
+import 'app/page/carrocel.dart';
 import 'app/page/cart_page.dart';
 import 'app/page/detail_album.dart';
 import 'app/page/feature_selection_album.dart';
@@ -33,12 +34,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'App',
         theme: ThemeData(
-          primaryColor: Colors.teal[400],
+          primaryColor: Colors.orange[800],
+          accentColor: Colors.white,
         ),
         initialRoute: '/',
         routes: {
           '/': (context) => RootPage(auth: Auth()),
-          // '/': (context) => AlbumSelectionPage(),
+          // '/': (context) => CarouselDemo(),
           '/home': (context) => HomePage(),
           '/create': (context) => FeatureSelectionPage(),
           '/cart': (context) => CartPage(),
