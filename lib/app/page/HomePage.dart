@@ -16,12 +16,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fotos'),
+        title: Image.asset('assets/img/icon-name.png'),
         centerTitle: true,
         actions: <Widget>[
           Container(
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: _Tab(context,_selectedPage),
+      body: _Tab(context, _selectedPage),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -90,146 +90,147 @@ class _HomePageState extends State<HomePage> {
           ]),
     );
   }
-  Widget _Tab(BuildContext context, int tab){
+
+  Widget _Tab(BuildContext context, int tab) {
     final _pageOptions = [
-    Container(
-        // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-        // width: MediaQuery.of(context).size.width - 40,
-        // alignment: Alignment.center,
-        child: Stack(
-      children: <Widget>[
-        ListView(
-          children: <Widget>[
-            Card(
-                child: Container(
-              // width: 100,
-              height: 100,
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Image.asset(
-                      "assets/img/img3.jpg",
-                      fit: BoxFit.fitHeight,
-                      // height: 300,
-                      // width: 150.0,
-                    ),
-
-                    title: new Text(
-                      "Album 2",
-                      style: new TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: new Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text("Album",
-                              style: new TextStyle(
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.normal)),
-                          new Text('Population: ',
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  fontWeight: FontWeight.normal)),
-                        ]),
-                    //trailing: ,
-                    onTap: () {
-                Navigator.pushNamed(context, '/Detail');
-                    },
-                  )
-                ],
-              ),
-            )),
-            Card(
-                child: Container(
-              // width: 100,
-              height: 100,
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Image.asset(
-                      "assets/img/img1.jpg",
-                      fit: BoxFit.cover,
-                    ),
-
-                    title: Text(
-                      "Album 1",
-                      style: new TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          new Text("Album",
-                              style: new TextStyle(
-                                  fontSize: 13.0,
-                                  fontWeight: FontWeight.normal)),
-                          new Text('Population: ',
-                              style: new TextStyle(
-                                  fontSize: 11.0,
-                                  fontWeight: FontWeight.normal)),
-                        ]),
-                    //trailing: ,
-                    onTap: () {
-                Navigator.pushNamed(context, '/Detail');
-                      // Navigator.pushNamed(context, '/cart');
-                    },
-                  )
-                ],
-              ),
-            ))
-          ],
-        )
-      ],
-    )),
-    Container(
-      padding: EdgeInsets.symmetric(horizontal: 0),
-      margin: EdgeInsets.only(top: 32),
-      child: Column(
+      Container(
+          // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          // width: MediaQuery.of(context).size.width - 40,
+          // alignment: Alignment.center,
+          child: Stack(
         children: <Widget>[
-          Container(
-            color: Colors.white,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(right: 16),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.brown.shade800,
-                      child: Text('HR'),
+          ListView(
+            children: <Widget>[
+              Card(
+                  child: Container(
+                // width: 100,
+                height: 100,
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Image.asset(
+                        "assets/img/img3.jpg",
+                        fit: BoxFit.fitHeight,
+                        // height: 300,
+                        // width: 150.0,
+                      ),
+
+                      title: new Text(
+                        "Album 2",
+                        style: new TextStyle(
+                            fontSize: 14.0, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: new Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Text("Album",
+                                style: new TextStyle(
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.normal)),
+                            new Text('Population: ',
+                                style: new TextStyle(
+                                    fontSize: 11.0,
+                                    fontWeight: FontWeight.normal)),
+                          ]),
+                      //trailing: ,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/Detail');
+                      },
+                    )
+                  ],
+                ),
+              )),
+              Card(
+                  child: Container(
+                // width: 100,
+                height: 100,
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Image.asset(
+                        "assets/img/img1.jpg",
+                        fit: BoxFit.cover,
+                      ),
+
+                      title: Text(
+                        "Album 1",
+                        style: new TextStyle(
+                            fontSize: 14.0, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Text("Album",
+                                style: new TextStyle(
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.normal)),
+                            new Text('Population: ',
+                                style: new TextStyle(
+                                    fontSize: 11.0,
+                                    fontWeight: FontWeight.normal)),
+                          ]),
+                      //trailing: ,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/Detail');
+                        // Navigator.pushNamed(context, '/cart');
+                      },
+                    )
+                  ],
+                ),
+              ))
+            ],
+          )
+        ],
+      )),
+      Container(
+        padding: EdgeInsets.symmetric(horizontal: 0),
+        margin: EdgeInsets.only(top: 32),
+        child: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.white,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(right: 16),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.brown.shade800,
+                        child: Text('HR'),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Habib RG',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        Text('habib_mma@hotmail.com',
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Habib RG',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12))
-                      ],
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          Text('habib_mma@hotmail.com',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 12))
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    child: Icon(Icons.chevron_right),
-                  )
-                ],
+                    Container(
+                      child: Icon(Icons.chevron_right),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    )
-  ];
+          ],
+        ),
+      )
+    ];
     return _pageOptions[tab];
   }
 }

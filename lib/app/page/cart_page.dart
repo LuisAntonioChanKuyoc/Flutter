@@ -1,3 +1,4 @@
+import 'package:app_demo/app/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -8,95 +9,78 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  int _currentStep = 0;
-  bool complete = false;
-
-  List<Step> _purchaseSteps = [
-    Step(
-      title: const Text(''),
-      isActive: true,
-      state: StepState.indexed,
-      content: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Email Address'),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Password'),
-          ),
-        ],
-      ),
-    ),
-    Step(
-      isActive: false,
-      state: StepState.indexed,
-      title: const Text(''),
-      content: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Home Address'),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Postcode'),
-          ),
-        ],
-      ),
-    ),
-    Step(
-      state: StepState.indexed,
-      title: const Text(''),
-      content: Column(
-        children: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.red,
-          )
-        ],
-      ),
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+
     return Scaffold(
-      body: Column(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('easyPhotos'),
+      ),
+      body: ListView(
         children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            SafeArea(
-              child: Text(
-                "Esta completo tu carrito",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16, color: Color.fromRGBO(155, 155, 155, 1)),
-              ),
-            ),
-          ]),
-          Expanded(
-            child: Stepper(
-              currentStep: _currentStep,
-              steps: _purchaseSteps,
-              type: StepperType.horizontal,
-              onStepContinue: next,
-              onStepTapped: (step) => goTo(step),
-              onStepCancel: cancel,
-            ),
-          )
+          Column(children: <Widget>[_Card()])
         ],
       ),
     );
   }
+}
 
-  next() {
-    _currentStep + 1 != _purchaseSteps.length
-        ? goTo(_currentStep + 1)
-        : setState(() => complete = true);
+class _Card extends StatelessWidget {
+  _Card({
+    String title,
+    String subtitle,
+  });
+  @override
+  Widget build(BuildContext context) {
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    return Container(
+      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [AppColors.simpleShadow],
+          borderRadius: BorderRadius.all(Radius.circular(2))),
+      child: Row(
+        children: <Widget>[
+          _image(deviceInfo.size.height * .15),
+          _description(deviceInfo.size.height * .15),
+        ],
+      ),
+      width: double.infinity,
+    );
   }
 
-  cancel() {
-    if (_currentStep > 0) {
-      goTo(_currentStep - 1);
-    }
+  Widget _info() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Mis Fotos',
+            style: AppColors.titleStyle,
+          ),
+          Text('soy el titulo'),
+          Text('soy el titulo'),
+        ],
+      );
+
+  Widget _description(double height) {
+    return Container(
+        height: height,
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(color: Colors.white),
+        child: _info());
   }
 
-  goTo(int step) {
-    setState(() => _currentStep = step);
+  Widget _image(double height) {
+    return Container(
+      margin: EdgeInsets.only(right: 5),
+      height: height,
+      width: 100,
+      color: Colors.yellow,
+    );
   }
 }
+
+
