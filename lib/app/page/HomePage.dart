@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
             margin: EdgeInsets.all(2.0),
             child: GestureDetector(
               onTap: (){
-                _askUser();
               },
               child: ClipRRect(
               child: Image.asset(
