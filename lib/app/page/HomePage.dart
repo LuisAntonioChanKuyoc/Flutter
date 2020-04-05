@@ -1,6 +1,17 @@
 import 'package:app_demo/app/Core/Auth/BaseAuth.dart';
+import 'package:app_demo/app/themes/app_colors.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+enum Answers { YES, NO, MAYBE }
+
+final List<String> imgList = [
+  'assets/img/img1.jpg',
+  'assets/img/img2.jpg',
+  'assets/img/img3.jpg',
+  'assets/img/img4.jpg',
+];
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.logoutCallback})
@@ -16,6 +27,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
+
+  final CarouselSlider autoPlayDemo = CarouselSlider(
+    viewportFraction: 0.9,
+    aspectRatio: 2.0,
+    autoPlay: true,
+    // enlargeCenterPage: true,
+    items: imgList.map(
+      (url) {
+        return Container(
+          margin: EdgeInsets.all(2.0),
+          child: GestureDetector(
+            onTap: () {
+              // _askUser();
+            },
+            child: ClipRRect(
+              child: Image.asset(
+                url,
+                fit: BoxFit.cover,
+                width: 1000.0,
+              ),
+            ),
+          ),
+        );
+      },
+    ).toList(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +131,18 @@ class _HomePageState extends State<HomePage> {
   Widget _Tab(BuildContext context, int tab) {
     final _pageOptions = [
       Container(
-          // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          // width: MediaQuery.of(context).size.width - 40,
-          // alignment: Alignment.center,
           child: Stack(
         children: <Widget>[
           ListView(
             children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  child: Column(children: [
+                    autoPlayDemo,
+                  ])),
+              SizedBox(
+                height: 10,
+              ),
               Card(
                   child: Container(
                 // width: 100,
@@ -111,25 +153,23 @@ class _HomePageState extends State<HomePage> {
                       leading: Image.asset(
                         "assets/img/img3.jpg",
                         fit: BoxFit.fitHeight,
-                        // height: 300,
-                        // width: 150.0,
                       ),
 
-                      title: new Text(
+                      title: Text(
                         "Album 2",
-                        style: new TextStyle(
+                        style: TextStyle(
                             fontSize: 14.0, fontWeight: FontWeight.bold),
                       ),
-                      subtitle: new Column(
+                      subtitle: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            new Text("Album",
-                                style: new TextStyle(
+                            Text("Album",
+                                style: TextStyle(
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.normal)),
-                            new Text('Population: ',
-                                style: new TextStyle(
+                            Text('Population: ',
+                                style: TextStyle(
                                     fontSize: 11.0,
                                     fontWeight: FontWeight.normal)),
                           ]),
@@ -200,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       margin: EdgeInsets.only(right: 16),
                       child: CircleAvatar(
-                        backgroundColor: Colors.brown.shade800,
+                        backgroundColor: AppColors.grey,
                         child: Text('HR'),
                       ),
                     ),
@@ -232,5 +272,46 @@ class _HomePageState extends State<HomePage> {
       )
     ];
     return _pageOptions[tab];
+  }
+
+  Future _askUser() async {
+    switch (await showDialog(
+        context: context,
+        /*it shows a popup with few options which you can select, for option we
+        created enums which we can use with switch statement, in this first switch
+        will wait for the user to select the option which it can use with switch cases*/
+        child: new SimpleDialog(
+          title: new Text('Do you like Flutter?'),
+          children: <Widget>[
+            new SimpleDialogOption(
+              child: new Text('Yes!!!'),
+              onPressed: () {
+                Navigator.pop(context, Answers.YES);
+              },
+            ),
+            new SimpleDialogOption(
+              child: new Text('NO :('),
+              onPressed: () {
+                Navigator.pop(context, Answers.NO);
+              },
+            ),
+            new SimpleDialogOption(
+              child: new Text('Maybe :|'),
+              onPressed: () {
+                Navigator.pop(context, Answers.MAYBE);
+              },
+            ),
+          ],
+        ))) {
+      case Answers.YES:
+        // _setValue('Yes');
+        break;
+      case Answers.NO:
+        // _setValue('No');
+        break;
+      case Answers.MAYBE:
+        // _setValue('Maybe');
+        break;
+    }
   }
 }

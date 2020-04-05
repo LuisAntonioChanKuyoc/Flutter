@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
-                      colors: [Color(0xff80cbc4), Color(0xff4db6ac)])),
+                      colors: [Color(0xfff57C00), Color(0xffe65100)])),
               child: Text(
                 'Iniciar',
                 style: TextStyle(fontSize: 20, color: Colors.white),
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
               'Registrarse',
               style: TextStyle(
-                  color: Color(0xff4db6ac),
+                  color: Color(0xfff57C00),
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -229,6 +229,19 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _Logo() {
+    return Container(
+      // alignment: ,
+      child:Column(
+        children: <Widget>[
+          Image.asset("assets/img/logo.jpeg",
+                        fit: BoxFit.cover)
+        ],
+      )
+      ,
+    );
+  }
+
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
@@ -241,9 +254,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Demo'),
-        ),
+        // appBar: AppBar(
+        //   title: Text('Demo'),
+        // ),
         body: SingleChildScrollView(
             child: Container(
           height: MediaQuery.of(context).size.height - 80,
@@ -255,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center, //Alinea centro
                   children: <Widget>[
-                    _title(),
+                    _Logo(),
                     SizedBox(
                       height: 10,
                     ),
