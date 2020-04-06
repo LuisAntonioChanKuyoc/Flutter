@@ -33,12 +33,12 @@ class AppColors {
   // shadow
 
   static const BoxShadow simpleShadow = BoxShadow(
-    color: Color.fromRGBO(0, 0, 0, .05),
-    blurRadius: 2.0, // soften the shadow
-    spreadRadius: 3.0, //extend the shadow
+    color: Color.fromRGBO(0, 0, 0, .15),
+    blurRadius: 2, // soften the shadow
+    spreadRadius: 2.0, //extend the shadow
     offset: Offset(
-      5.0, // Move to right 10  horizontally
-      5.0, // Move to bottom 10 Vertically
+      1.5, // Move to right 10  horizontally
+      1.0, // Move to bottom 10 Vertically
     ),
   );
 }

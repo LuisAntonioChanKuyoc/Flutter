@@ -1,6 +1,6 @@
 import 'package:app_demo/app/Core/Auth/BaseAuth.dart';
+import 'package:app_demo/app/page/Widget/custom_carrousel.dart';
 import 'package:app_demo/app/themes/app_colors.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +34,6 @@ class Ad {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _current = 0;
   int _selectedPage = 0;
   List<Ad> ads = [
     new Ad(
@@ -53,14 +52,6 @@ class _HomePageState extends State<HomePage> {
         "Ver producto",
         "assets/img/img3.jpg")
   ];
-  List<T> map<T>(List list, Function handler) {
-    List<T> result = [];
-    for (var i = 0; i < list.length; i++) {
-      result.add(handler(i, list[i]));
-    }
-
-    return result;
-  }
 
   createDialog(BuildContext context, Ad ad) {
     return showDialog(
@@ -114,44 +105,12 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  createCarouselSlider(BuildContext context) {
-    MediaQueryData deviceInfo = MediaQuery.of(context);
-    return CarouselSlider(
-      height: deviceInfo.size.height * .18,
-      autoPlayInterval: Duration(seconds: 6),
-      viewportFraction: 1.0,
-      aspectRatio: 2,
-      autoPlay: true,
-      onPageChanged: (index) {
-        setState(() {
-          _current = index;
-        });
+  createCarouselSlider() {
+    return CustomCarrousel(
+      onPress: (context, item) {
+        this.createDialog(context, item);
       },
-      // enlargeCenterPage: true,
-      items: ads.map(
-        (item) {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 4),
-            width: deviceInfo.size.width - 32,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [AppColors.simpleShadow]),
-            child: GestureDetector(
-              onTap: () {
-                print("tap a item de carrousel");
-                createDialog(context, item);
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  item.imageURL,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          );
-        },
-      ).toList(),
+      items: ads,
     );
   }
 
@@ -236,32 +195,8 @@ class _HomePageState extends State<HomePage> {
           ListView(
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.symmetric(vertical: 12),
-                  padding: EdgeInsets.symmetric(vertical: 5.0),
-                  child: Column(
-                    children: <Widget>[
-                      createCarouselSlider(context),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: map<Widget>(
-                          ads,
-                          (index, url) {
-                            return Container(
-                              width: 8.0,
-                              height: 8.0,
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 2.0),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == index
-                                      ? Color.fromRGBO(0, 0, 0, 0.9)
-                                      : Color.fromRGBO(0, 0, 0, 0.4)),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  )),
+                child: createCarouselSlider(),
+              ),
               SizedBox(
                 height: 10,
               ),

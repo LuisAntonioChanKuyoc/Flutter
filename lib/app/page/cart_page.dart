@@ -67,7 +67,19 @@ class _CartPageState extends State<CartPage> {
               height: 80,
               width: deviceInfo.size.width,
               child: Center(
-                child: Text('Ir a comprar'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Total: 400',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      'Ir a pagar',
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
               ),
             ),
           )
@@ -135,6 +147,18 @@ class _CardShopping extends StatelessWidget {
                 fontFamily: 'Roboto',
                 color: new Color(0xFF212121),
                 fontSize: 12),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'subtotal: 200',
+                style: TextStyle(
+                    fontFamily: 'Roboto',
+                    color: new Color(0xFF212121),
+                    fontSize: 12),
+              ),
+            ),
           )
         ],
       );
@@ -170,7 +194,7 @@ class _CardShopping extends StatelessWidget {
         children: <Widget>[
           InkWell(
               onTap: () => {print('apretado')},
-              child: Icon(Icons.close, color: Colors.black26, size: 18)),
+              child: Icon(Icons.delete, color: Colors.black26, size: 18)),
           MoreOrLess(
             count: this.count,
             horizontal: true,
