@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           borderRadius:BorderRadius.circular(20.0)
         ),
         title: Container(
-          height:180,
+          height:160,
           decoration: new BoxDecoration(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
             image: DecorationImage(
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         content: Container(
-          height: 125,
+          height: 150,
           child: Padding(
             padding: const EdgeInsets.all(0.0),
             child: Column(
