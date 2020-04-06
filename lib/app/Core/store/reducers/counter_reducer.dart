@@ -12,5 +12,5 @@ Counter _incrementReducer(Counter state, IncrementCounter action) {
 }
 
 Counter _decrementeReducer(Counter state, DecrementCounter action) {
-  return new Counter().copyWith(counter: state.counter - 11);
+  return new Counter().copyWith(counter: state.counter - 1);
 }

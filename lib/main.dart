@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
           '/cart': (context) => CartPage(),
           '/Detail': (context) => DeailPage(),
           '/ListAbum': (context) => ListAlbumPage(),
-
         });
   }
 }

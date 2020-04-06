@@ -1,10 +1,10 @@
 import 'package:app_demo/app/Core/Auth/BaseAuth.dart';
+import 'package:app_demo/app/page/Widget/custom_carrousel.dart';
 import 'package:app_demo/app/themes/app_colors.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-enum Answers{YES,NO,MAYBE}
+enum Answers { YES, NO, MAYBE }
 
 final List<String> imgList = [
   'assets/img/img1.jpg',
@@ -25,113 +25,94 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => new _HomePageState();
 }
 
-class Ad{
+class Ad {
   String title;
   String content;
   String buttonText;
   String imageURL;
-  Ad(this.title, this.content, this.buttonText, this.imageURL){}
+  Ad(this.title, this.content, this.buttonText, this.imageURL) {}
 }
 
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
   List<Ad> ads = [
-    new Ad("Portadas prediseñadas", "Una vez creado tu álbum, selecciona 'Cambiar portada' y encontrarás portadas prediseñadas de diferentes temas", "Crear álbum", "assets/img/img1.jpg"),
-    new Ad("Pasta suave","Paquete con 60 fotos, papel couche e impresión digital por solo \$ 199 MXN. ¡No te lo pierdas!","Ver producto","assets/img/img2.jpg"),
-    new Ad("Pasta dura","Paquete con 60 fotos, papel couche 150 grs, tamaño 16x16 e impresión digital por solo \$ 349 MXN","Ver producto","assets/img/img3.jpg")
+    new Ad(
+        "Portadas prediseñadas",
+        "Una vez creado tu álbum, selecciona 'Cambiar portada' y encontrarás portadas prediseñadas de diferentes temas",
+        "Crear álbum",
+        "assets/img/img1.jpg"),
+    new Ad(
+        "Pasta suave",
+        "Paquete con 60 fotos, papel couche e impresión digital por solo \$ 199 MXN. ¡No te lo pierdas!",
+        "Ver producto",
+        "assets/img/img2.jpg"),
+    new Ad(
+        "Pasta dura",
+        "Paquete con 60 fotos, papel couche 150 grs, tamaño 16x16 e impresión digital por solo \$ 349 MXN",
+        "Ver producto",
+        "assets/img/img3.jpg")
   ];
 
-  createDialog(BuildContext context, Ad ad){
-    return showDialog(context: context, builder: (context){
-      return AlertDialog(
-        titlePadding: const EdgeInsets.all(0.0) ,
-        shape: RoundedRectangleBorder(
-          borderRadius:BorderRadius.circular(20.0)
-        ),
-        title: Container(
-          height:180,
-          decoration: new BoxDecoration(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-            image: DecorationImage(
-              image: new AssetImage(ad.imageURL),
-              fit: BoxFit.fill,
-              
-            )
-          ),
-        ),
-        content: Container(
-          height: 125,
-          child: Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(ad.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
-                      )
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                Column(
-                  children: <Widget>[Text(ad.content)],
-                )
-              ],
-            ),
-          ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text(ad.buttonText), 
-            onPressed: () {
-              Navigator.pop(context);
-            }
-          )
-        ]
-      );  
-    });
-  }
-  
-  createCarouselSlider(BuildContext context){
-    return CarouselSlider(
-      autoPlayInterval: Duration(seconds: 6),
-      viewportFraction: 0.9,
-      aspectRatio: 2.0,
-      autoPlay: true,
-      // enlargeCenterPage: true,
-      items: ads.map(
-        (item) {
-          return Container(
-            margin: EdgeInsets.all(2.0),
-            child: GestureDetector(
-              onTap: (){
-                print("tap a item de carrousel" );
-                createDialog(context, item);
-              },
-              child: ClipRRect(
-              child: Image.asset(
-                item.imageURL,
-                fit: BoxFit.cover,
-                width: 1000.0,
+  createDialog(BuildContext context, Ad ad) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              titlePadding: const EdgeInsets.all(0.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              title: Container(
+                height: 160,
+                decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0)),
+                    image: DecorationImage(
+                      image: new AssetImage(ad.imageURL),
+                      fit: BoxFit.fill,
+                    )),
               ),
-            ),
-            ),
-          );
-        },
-      ).toList(),
+              content: Container(
+                height: 150,
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Column(children: <Widget>[
+                        Text(ad.title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18))
+                      ])
+                    ],
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text(ad.buttonText),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ]);
+        });
+  }
+
+  createCarouselSlider() {
+    return CustomCarrousel(
+      onPress: (context, item) {
+        this.createDialog(context, item);
+      },
+      items: ads,
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fotos'),
+        title: Image.asset('assets/img/icon-name.png'),
         centerTitle: true,
         actions: <Widget>[
           Container(
@@ -183,7 +164,6 @@ class _HomePageState extends State<HomePage> {
           Navigator.pushNamed(context, '/create');
         },
         child: Icon(Icons.add_a_photo),
-        backgroundColor: Color(0xff4db6ac),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedPage,
@@ -208,14 +188,12 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           ListView(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                child: Column(children: [
-                  createCarouselSlider(context)
-                ])),
+              Container(
+                child: createCarouselSlider(),
+              ),
               SizedBox(
-                    height: 10,
-                  ),
+                height: 10,
+              ),
               Card(
                   child: Container(
                 // width: 100,
@@ -228,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                         fit: BoxFit.fitHeight,
                       ),
 
-                      title:  Text(
+                      title: Text(
                         "Album 2",
                         style: TextStyle(
                             fontSize: 14.0, fontWeight: FontWeight.bold),
@@ -237,11 +215,11 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                           Text("Album",
+                            Text("Album",
                                 style: TextStyle(
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.normal)),
-                           Text('Population: ',
+                            Text('Population: ',
                                 style: TextStyle(
                                     fontSize: 11.0,
                                     fontWeight: FontWeight.normal)),
@@ -348,8 +326,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future _askUser() async {
-    switch(
-    await showDialog(
+    switch (await showDialog(
         context: context,
         /*it shows a popup with few options which you can select, for option we
         created enums which we can use with switch statement, in this first switch
@@ -357,13 +334,26 @@ class _HomePageState extends State<HomePage> {
         child: new SimpleDialog(
           title: new Text('Do you like Flutter?'),
           children: <Widget>[
-            new SimpleDialogOption(child: new Text('Yes!!!'),onPressed: (){Navigator.pop(context, Answers.YES);},),
-            new SimpleDialogOption(child: new Text('NO :('),onPressed: (){Navigator.pop(context, Answers.NO);},),
-            new SimpleDialogOption(child: new Text('Maybe :|'),onPressed: (){Navigator.pop(context, Answers.MAYBE);},),
+            new SimpleDialogOption(
+              child: new Text('Yes!!!'),
+              onPressed: () {
+                Navigator.pop(context, Answers.YES);
+              },
+            ),
+            new SimpleDialogOption(
+              child: new Text('NO :('),
+              onPressed: () {
+                Navigator.pop(context, Answers.NO);
+              },
+            ),
+            new SimpleDialogOption(
+              child: new Text('Maybe :|'),
+              onPressed: () {
+                Navigator.pop(context, Answers.MAYBE);
+              },
+            ),
           ],
-        )
-    )
-    ) {
+        ))) {
       case Answers.YES:
         // _setValue('Yes');
         break;

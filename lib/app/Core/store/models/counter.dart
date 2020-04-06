@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:meta/meta.dart';
 
+@immutable
 class Counter {
   final int counter;
 
