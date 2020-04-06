@@ -25,34 +25,135 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => new _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int _selectedPage = 0;
+class Ad {
+  String title;
+  String content;
+  String buttonText;
+  String imageURL;
+  Ad(this.title, this.content, this.buttonText, this.imageURL) {}
+}
 
-  final CarouselSlider autoPlayDemo = CarouselSlider(
-    viewportFraction: 0.9,
-    aspectRatio: 2.0,
-    autoPlay: true,
-    // enlargeCenterPage: true,
-    items: imgList.map(
-      (url) {
-        return Container(
-          margin: EdgeInsets.all(2.0),
-          child: GestureDetector(
-            onTap: () {
-              // _askUser();
-            },
-            child: ClipRRect(
-              child: Image.asset(
-                url,
-                fit: BoxFit.cover,
-                width: 1000.0,
+class _HomePageState extends State<HomePage> {
+  int _current = 0;
+  int _selectedPage = 0;
+  List<Ad> ads = [
+    new Ad(
+        "Portadas prediseñadas",
+        "Una vez creado tu álbum, selecciona 'Cambiar portada' y encontrarás portadas prediseñadas de diferentes temas",
+        "Crear álbum",
+        "assets/img/img1.jpg"),
+    new Ad(
+        "Pasta suave",
+        "Paquete con 60 fotos, papel couche e impresión digital por solo \$ 199 MXN. ¡No te lo pierdas!",
+        "Ver producto",
+        "assets/img/img2.jpg"),
+    new Ad(
+        "Pasta dura",
+        "Paquete con 60 fotos, papel couche 150 grs, tamaño 16x16 e impresión digital por solo \$ 349 MXN",
+        "Ver producto",
+        "assets/img/img3.jpg")
+  ];
+  List<T> map<T>(List list, Function handler) {
+    List<T> result = [];
+    for (var i = 0; i < list.length; i++) {
+      result.add(handler(i, list[i]));
+    }
+
+    return result;
+  }
+
+  createDialog(BuildContext context, Ad ad) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              titlePadding: const EdgeInsets.all(0.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0)),
+              title: Container(
+                height: 180,
+                decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0)),
+                    image: DecorationImage(
+                      image: new AssetImage(ad.imageURL),
+                      fit: BoxFit.fill,
+                    )),
+              ),
+              content: Container(
+                height: 125,
+                child: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Text(ad.title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18))
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Column(
+                        children: <Widget>[Text(ad.content)],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text(ad.buttonText),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ]);
+        });
+  }
+
+  createCarouselSlider(BuildContext context) {
+    MediaQueryData deviceInfo = MediaQuery.of(context);
+    return CarouselSlider(
+      height: deviceInfo.size.height * .18,
+      autoPlayInterval: Duration(seconds: 6),
+      viewportFraction: 1.0,
+      aspectRatio: 2,
+      autoPlay: true,
+      onPageChanged: (index) {
+        setState(() {
+          _current = index;
+        });
+      },
+      // enlargeCenterPage: true,
+      items: ads.map(
+        (item) {
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: 4),
+            width: deviceInfo.size.width - 32,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [AppColors.simpleShadow]),
+            child: GestureDetector(
+              onTap: () {
+                print("tap a item de carrousel");
+                createDialog(context, item);
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  item.imageURL,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-        );
-      },
-    ).toList(),
-  );
+          );
+        },
+      ).toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +211,6 @@ class _HomePageState extends State<HomePage> {
           Navigator.pushNamed(context, '/create');
         },
         child: Icon(Icons.add_a_photo),
-        backgroundColor: Color(0xff4db6ac),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedPage,
@@ -135,11 +235,33 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           ListView(
             children: <Widget>[
-              Padding(
+              Container(
+                  margin: EdgeInsets.symmetric(vertical: 12),
                   padding: EdgeInsets.symmetric(vertical: 5.0),
-                  child: Column(children: [
-                    autoPlayDemo,
-                  ])),
+                  child: Column(
+                    children: <Widget>[
+                      createCarouselSlider(context),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: map<Widget>(
+                          ads,
+                          (index, url) {
+                            return Container(
+                              width: 8.0,
+                              height: 8.0,
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 2.0),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _current == index
+                                      ? Color.fromRGBO(0, 0, 0, 0.9)
+                                      : Color.fromRGBO(0, 0, 0, 0.4)),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  )),
               SizedBox(
                 height: 10,
               ),
