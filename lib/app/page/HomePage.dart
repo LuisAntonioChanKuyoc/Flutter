@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               title: Container(
-                height: 180,
+                height: 160,
                 decoration: new BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
@@ -73,24 +73,18 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               content: Container(
-                height: 125,
+                height: 150,
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Column(
-                        children: <Widget>[
-                          Text(ad.title,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18))
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Column(
-                        children: <Widget>[Text(ad.content)],
-                      )
+                      Column(children: <Widget>[
+                        Text(ad.title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18))
+                      ])
                     ],
                   ),
                 ),
